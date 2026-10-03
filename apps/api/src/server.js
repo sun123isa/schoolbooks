@@ -1,3 +1,4 @@
+// Responsable : Isaac LELO MAKAYA (socle backend) — relecture : Salem KONGOLO
 import 'dotenv/config';
 import app from './app.js';
 
