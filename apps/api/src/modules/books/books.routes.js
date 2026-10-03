@@ -1,20 +1,25 @@
+// =============================================================================
+// Module BOOKS (historique, antérieur au MVP « ressources ») — /api/books
+// Responsable : Emmanuel AYA (catalogue) — relecture : Salem KONGOLO
+// Code conservé tel quel. Les nouvelles fonctionnalités passent par les modules
+// referentiels, recherche et ressources. POST /api/books (upload) est hors MVP
+// pour les utilisateurs : il pourra servir de base à l'intégration au catalogue.
+// =============================================================================
 import express from 'express';
 import multer from 'multer';
-import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import {
   listBooksController,
   getBookController,
   downloadBookController,
   createBookController
-} from '../controllers/books.controller.js';
+} from './books.controller.js';
 import {
     validateParams,
   validateBody,
-  listBooksQuerySchema,
   bookIdParamsSchema,
   createBookBodySchema
-} from '../validators/books.validator.js';
+} from './books.validator.js';
 
 const router = express.Router();
 

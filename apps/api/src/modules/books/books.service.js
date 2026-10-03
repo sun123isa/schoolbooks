@@ -1,9 +1,16 @@
+// =============================================================================
+// Module BOOKS (historique, antérieur au MVP « ressources ») — /api/books
+// Responsable : Emmanuel AYA (catalogue) — relecture : Salem KONGOLO
+// Code conservé tel quel. Les nouvelles fonctionnalités passent par les modules
+// referentiels, recherche et ressources. POST /api/books (upload) est hors MVP
+// pour les utilisateurs : il pourra servir de base à l'intégration au catalogue.
+// =============================================================================
 import {
   listBooks as listBooksRepo,
   getBookById as getBookByIdRepo,
   createBook as createBookRepo,
   incrementDownloadCount as incrementDownloadCountRepo
-} from '../repositories/books.repository.js';
+} from './books.repository.js';
 
 // Le service contient la logique métier liée aux livres.
 // Il utilise le repository pour accéder aux données.

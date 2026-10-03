@@ -1,7 +1,15 @@
+// =============================================================================
+// Module BOOKS (historique, antérieur au MVP « ressources ») — /api/books
+// Responsable : Emmanuel AYA (catalogue) — relecture : Salem KONGOLO
+// Code conservé tel quel. Les nouvelles fonctionnalités passent par les modules
+// referentiels, recherche et ressources. POST /api/books (upload) est hors MVP
+// pour les utilisateurs : il pourra servir de base à l'intégration au catalogue.
+// =============================================================================
 import path from 'path';
 import fs from 'fs/promises';
+import { createReadStream } from 'fs';
 import { fileURLToPath } from 'url';
-import * as booksService from '../services/books.service.js';
+import * as booksService from './books.service.js';
 
 // __dirname en ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -71,7 +79,7 @@ export async function downloadBookController(req, res, next) {
     const book = await booksService.getBookById(id);
 
     // Chemin absolu vers le fichier PDF.
-    const rootDir = path.resolve(__dirname, '../../');
+    const rootDir = path.resolve(__dirname, '../../../');
     const filePath = path.join(rootDir, book.file_path);
 
     // Vérifie que le fichier existe.
@@ -94,7 +102,7 @@ export async function downloadBookController(req, res, next) {
       `attachment; filename="${book.file_name}"`
     );
 
-    const fileStream = fs.createReadStream(filePath);
+    const fileStream = createReadStream(filePath);
     fileStream.pipe(res);
   } catch (error) {
     next(error);
