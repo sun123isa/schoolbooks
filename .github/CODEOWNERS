@@ -1,0 +1,70 @@
+# =============================================================================
+# CODEOWNERS — qui doit approuver une PR selon les fichiers modifiés
+# Responsable : Isaac LELO MAKAYA (Lead Repo) — validé par HIRWA Jean Baptiste (Lead Dev)
+#
+# Règles :
+#   - Salem KONGOLO (Lead Reviewer) est relecteur de tout le dépôt ;
+#   - le socle frontend et l'architecture (contrat partagé, configuration
+#     racine) sont rattachés à HIRWA Jean Baptiste ;
+#   - chaque développeur est propriétaire de son dossier ;
+#   - quand Salem est l'auteur (module recherche), Jean Baptiste relit.
+# Une PR est mergeable quand au moins un propriétaire (autre que l'auteur) l'a
+# approuvée — à activer dans la protection de branche « Require review from Code Owners ».
+# En cas de règles multiples, c'est la DERNIÈRE règle correspondante qui s'applique.
+#
+# ⚠ À FAIRE (Isaac) : remplacer chaque pseudo ci-dessous par le vrai compte GitHub.
+#   @PSEUDO_HIRWA     HIRWA Jean Baptiste   Lead Dev — frontend landing + socle
+#   @PSEUDO_GRACIEL   Graciel MBEMBA        frontend recherche
+#   @PSEUDO_KARENE    Karene MOUSSOUNDA     frontend consultation
+#   @PSEUDO_ISAAC     Isaac LELO MAKAYA     Lead Repo — backend socle + référentiels
+#   @PSEUDO_SALEM     Salem KONGOLO         Lead Reviewer — backend recherche
+#   @PSEUDO_EMMANUEL  Emmanuel AYA          backend ressources et fichiers
+#   @PSEUDO_GLOIRE    Gloire MASSENGO       Lead Projet (documentation)
+# =============================================================================
+
+# Par défaut : architecture (Lead Dev) + relecture (Lead Reviewer).
+*                                          @PSEUDO_HIRWA @PSEUDO_SALEM
+
+# --- Architecture et contrat partagé (Jean Baptiste) -------------------------
+/package.json                              @PSEUDO_HIRWA @PSEUDO_SALEM
+/package-lock.json                         @PSEUDO_HIRWA @PSEUDO_SALEM
+/packages/shared/                          @PSEUDO_HIRWA @PSEUDO_SALEM
+/packages/shared/src/contract/referentiels.schema.js  @PSEUDO_ISAAC @PSEUDO_HIRWA @PSEUDO_SALEM
+/packages/shared/src/contract/errors.js               @PSEUDO_ISAAC @PSEUDO_HIRWA @PSEUDO_SALEM
+/packages/shared/src/contract/recherche.schema.js     @PSEUDO_SALEM @PSEUDO_HIRWA
+/packages/shared/src/contract/ressources.schema.js    @PSEUDO_EMMANUEL @PSEUDO_HIRWA @PSEUDO_SALEM
+/packages/shared/src/mocks/referentiels.mock.js       @PSEUDO_ISAAC @PSEUDO_HIRWA @PSEUDO_SALEM
+/packages/shared/src/mocks/ressources.mock.js         @PSEUDO_EMMANUEL @PSEUDO_SALEM @PSEUDO_HIRWA
+
+# --- Frontend ----------------------------------------------------------------
+# Socle partagé (layout, routeur, client API, composants communs) : Jean Baptiste.
+/apps/web/                                 @PSEUDO_HIRWA @PSEUDO_SALEM
+/apps/web/src/pages/landing/               @PSEUDO_HIRWA @PSEUDO_SALEM
+/apps/web/src/pages/recherche/             @PSEUDO_GRACIEL @PSEUDO_SALEM
+/apps/web/src/pages/ressource/             @PSEUDO_KARENE @PSEUDO_SALEM
+/apps/web/public/mocks/                    @PSEUDO_KARENE @PSEUDO_SALEM
+
+# --- Backend -----------------------------------------------------------------
+# Socle serveur (app.js, config, middlewares, utils, scripts) : Isaac.
+/apps/api/                                 @PSEUDO_ISAAC @PSEUDO_SALEM
+/apps/api/src/modules/referentiels/        @PSEUDO_ISAAC @PSEUDO_SALEM
+/apps/api/src/modules/recherche/           @PSEUDO_SALEM @PSEUDO_HIRWA
+/apps/api/src/modules/ressources/          @PSEUDO_EMMANUEL @PSEUDO_SALEM
+/apps/api/src/modules/books/               @PSEUDO_EMMANUEL @PSEUDO_SALEM
+/apps/api/test/                            @PSEUDO_SALEM @PSEUDO_ISAAC
+/apps/api/test/referentiels.routes.test.js @PSEUDO_ISAAC @PSEUDO_SALEM
+/apps/api/test/recherche.routes.test.js    @PSEUDO_SALEM @PSEUDO_HIRWA
+/apps/api/test/ressources.routes.test.js   @PSEUDO_EMMANUEL @PSEUDO_SALEM
+
+# --- Base de données : schéma, migrations, seeds (Isaac) ---------------------
+/database/                                 @PSEUDO_ISAAC @PSEUDO_SALEM
+
+# --- Dépôt, CI/CD, conventions (Isaac) ---------------------------------------
+/.github/                                  @PSEUDO_ISAAC @PSEUDO_SALEM
+/.github/CODEOWNERS                        @PSEUDO_ISAAC @PSEUDO_HIRWA
+/.gitignore                                @PSEUDO_ISAAC @PSEUDO_SALEM
+/.gitattributes                            @PSEUDO_ISAAC @PSEUDO_SALEM
+/docs/revue-de-code.md                     @PSEUDO_SALEM @PSEUDO_HIRWA
+
+# --- Documentation -----------------------------------------------------------
+/README.md                                 @PSEUDO_HIRWA @PSEUDO_GLOIRE @PSEUDO_SALEM
