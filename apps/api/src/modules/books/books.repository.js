@@ -1,4 +1,11 @@
-import { pool } from '../config/database.js';
+// =============================================================================
+// Module BOOKS (historique, antérieur au MVP « ressources ») — /api/books
+// Responsable : Emmanuel AYA (catalogue) — relecture : Salem KONGOLO
+// Code conservé tel quel. Les nouvelles fonctionnalités passent par les modules
+// referentiels, recherche et ressources. POST /api/books (upload) est hors MVP
+// pour les utilisateurs : il pourra servir de base à l'intégration au catalogue.
+// =============================================================================
+import { pool } from '../../config/database.js';
 
 // Le repository contient uniquement les requêtes SQL liées aux livres.
 // Il ne contient pas de logique métier, juste l'accès à PostgreSQL.
@@ -52,6 +59,7 @@ export async function listBooks({ level, subject, q } = {}) {
       OR description ILIKE $${conditionIndex}
     )`;
     values.push(`%${q}%`);
+    // eslint-disable-next-line no-useless-assignment -- garde le compteur cohérent si un filtre est ajouté après.
     conditionIndex++;
   }
 

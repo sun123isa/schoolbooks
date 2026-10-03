@@ -1,3 +1,10 @@
+// =============================================================================
+// Module BOOKS (historique, antérieur au MVP « ressources ») — /api/books
+// Responsable : Emmanuel AYA (catalogue) — relecture : Salem KONGOLO
+// Code conservé tel quel. Les nouvelles fonctionnalités passent par les modules
+// referentiels, recherche et ressources. POST /api/books (upload) est hors MVP
+// pour les utilisateurs : il pourra servir de base à l'intégration au catalogue.
+// =============================================================================
 import { z } from 'zod';
 
 // Schéma pour la création d'un livre (sans le fichier).
