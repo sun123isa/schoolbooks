@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+coverage/
+.DS_Store
+
+# PDF du catalogue : stockés sur disque, jamais versionnés (droits d'utilisation, BR10).
+apps/api/storage/
+apps/api/uploads/
