@@ -1,27 +1,23 @@
 // =============================================================================
 // Landing page — appels API
 // Responsable : HIRWA Jean Baptiste — relecture : Salem KONGOLO
-// Consomme : GET /api/niveaux, GET /api/niveaux/:code/filieres (module référentiels, Isaac)
+// Consomme : GET /api/ressources?tri=recent&limit=…&niveau=…  (recherche, Salem)
 // =============================================================================
-import { API_ROUTES, ERROR_CODES } from '@schoolbooks/shared';
-import { ApiError, apiGet } from '../../shared/api/client.js';
+import { API_ROUTES, RechercheQuerySchema } from '@schoolbooks/shared';
+import { apiGet } from '../../shared/api/client.js';
 
 const mocks = () => import('@schoolbooks/shared/mocks');
 
-export function fetchNiveaux(signal) {
-  return apiGet(API_ROUTES.niveaux, {
+function rechercher(criteres, signal) {
+  return apiGet(API_ROUTES.recherche, {
+    params: criteres,
     signal,
-    mock: async () => (await mocks()).NIVEAUX
+    mock: async () => (await mocks()).rechercherRessourcesMock(RechercheQuerySchema.parse(criteres))
   });
 }
 
-export function fetchFilieres(codeNiveau, signal) {
-  return apiGet(API_ROUTES.filieresDuNiveau(codeNiveau), {
-    signal,
-    mock: async () => {
-      const filieres = (await mocks()).listerFilieresMock(codeNiveau);
-      if (!filieres) throw new ApiError(404, ERROR_CODES.NIVEAU_INTROUVABLE, 'Niveau introuvable');
-      return filieres;
-    }
-  });
+// Dernières ressources ajoutées (section « Ajoutées récemment »), filtrables par niveau.
+export async function fetchNouveautes(nombre, niveau, signal) {
+  const resultat = await rechercher({ tri: 'recent', limit: nombre, niveau: niveau || undefined }, signal);
+  return resultat.items;
 }
